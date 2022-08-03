@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private TrailRenderer BulletTrail;
     [SerializeField] private float ShootDelay = 0.5f;
     [SerializeField] private LayerMask Mask;
+    public float Damage = 10; 
 
     // private Animator Animator;
     private float LastShootTime;
@@ -43,6 +44,11 @@ public class Gun : MonoBehaviour
 
                 LastShootTime = Time.time;
             }
+
+            /*test*/
+            var hitBox = hit.collider.GetComponent<HitBox>();
+            if(hitBox)
+                hitBox.OnRaycastHit(this, aimDir);
         }
     }
 
