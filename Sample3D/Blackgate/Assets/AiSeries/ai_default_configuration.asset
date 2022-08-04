@@ -14,3 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTime: 1
   maxDistance: 1
+  dieForce: 10
+  maxSightDistance: 5
+  attackRange: 1
+  walkPointRange: 3
+  PlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 256

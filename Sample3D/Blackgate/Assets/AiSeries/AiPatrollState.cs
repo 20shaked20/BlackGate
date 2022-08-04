@@ -6,8 +6,7 @@ public class AiPatrollState : AiState
 {
     public Vector3 walkPoint;
     bool walkPointSet;
-    public float walkPointRange = 3f;
-
+    
     public void Enter(AiAgent agent)
     {
     }
@@ -39,9 +38,10 @@ public class AiPatrollState : AiState
             walkPointSet = false;
 
 
-        if(CheckIfPlayerInSight(agent))
+        if(agent.config.CheckIfPlayerInSight(agent))
         {
             agent.navMeshAgent.speed = 3;
+            agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
         }
 
     }
@@ -49,8 +49,8 @@ public class AiPatrollState : AiState
     private void SearchWalkPoint(AiAgent agent)
     {
         /*Calculate random point in range to walk*/
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
+        float randomZ = Random.Range(-agent.config.walkPointRange, agent.config.walkPointRange);
+        float randomX = Random.Range(-agent.config.walkPointRange, agent.config.walkPointRange);
 
 
         walkPoint = new Vector3(x: agent.transform.position.x + randomX, y: agent.transform.position.y, z: agent.transform.position.z + randomZ);
@@ -58,26 +58,5 @@ public class AiPatrollState : AiState
 
         // if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) /*bugging the ai rn*/
         walkPointSet = true;
-    }
-
-    private bool CheckIfPlayerInSight(AiAgent agent)
-    {
-        Vector3 playerDirection = agent.playerTransform.position - agent.transform.position;
-        if (playerDirection.magnitude < agent.config.maxSightDistance)
-        {
-            return false;
-        }
-
-        Vector3 agentDirection = agent.transform.forward;
-
-        playerDirection.Normalize();
-
-        /*if agent is facing the player, then change state and chase him*/
-        float dotProduct = Vector3.Dot(playerDirection, agentDirection);
-        if (dotProduct > 0.0f)
-        {
-            agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
-        }
-        return true;
     }
 }

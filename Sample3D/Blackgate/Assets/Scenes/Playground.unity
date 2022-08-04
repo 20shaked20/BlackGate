@@ -5783,11 +5783,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb419fed137b91443ac3e2d741aad401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: 2
+  initialState: 4
   navMeshAgent: {fileID: 4909046170811107754}
   config: {fileID: 11400000, guid: 30ea49014b20c0c49a10dc87cccb4b68, type: 2}
   ragdoll: {fileID: 4909046170811107757}
   playerTransform: {fileID: 295077778}
+  animator: {fileID: 0}
 --- !u!4 &4943405717212198157
 Transform:
   m_ObjectHideFlags: 0

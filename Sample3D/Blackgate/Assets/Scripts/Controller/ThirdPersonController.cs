@@ -337,12 +337,12 @@ namespace StarterAssets
                     if(_input.sprint)
                     {
                         _animator.SetBool("IsRunning",true);
-                        Debug.Log("Is Running");
+                        // Debug.Log("Is Running");
                     }
                     else
                     {
                         _animator.SetBool("IsRunning",false);
-                        Debug.Log("Not Running");
+                        // Debug.Log("Not Running");
                     }
                 }
 

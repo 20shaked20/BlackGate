@@ -11,17 +11,20 @@ public class AiAgent : MonoBehaviour
     public AiAgentConfig config;
     public Ragdoll ragdoll;
     public Transform playerTransform;
+    public Animator animator;
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         ragdoll = GetComponent<Ragdoll>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
 
         stateMachine = new AiStateMachine(this);
         stateMachine.RegisterState(new AiChasePlayerState());
         stateMachine.RegisterState(new AiDeathState());
         stateMachine.RegisterState(new AiIdleState());
         stateMachine.RegisterState(new AiPatrollState());
+        stateMachine.RegisterState(new AiAttackState());
         stateMachine.ChangeState(initialState);
     }
 
@@ -29,5 +32,14 @@ public class AiAgent : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+
+        if (navMeshAgent.hasPath)
+        {
+            animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0);
+        }
     }
 }
