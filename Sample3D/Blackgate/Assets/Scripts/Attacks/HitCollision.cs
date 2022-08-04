@@ -17,7 +17,6 @@ public class HitCollision : MonoBehaviour
             bloodSpray.transform.parent = z.transform; /*set the blood particle as child of the zombie so it will stick to him*/
             Destroy(gameObject); /*does not need to see the hit effect on walls when attacking zombies*/
         }
-        
     }
     
 }

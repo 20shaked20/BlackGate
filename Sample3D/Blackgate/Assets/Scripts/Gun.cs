@@ -67,7 +67,8 @@ public class Gun : MonoBehaviour
 
         // Animator.SetBool("IsShooting",false);
         Trail.transform.position = Hit.point;
-        Instantiate(ImpactParticaleSystem, Hit.point, Quaternion.LookRotation(Hit.normal));
+        // if(Hit.transform.tag != "Enemy")
+            // Instantiate(ImpactParticaleSystem, Hit.point, Quaternion.LookRotation(Hit.normal)); /*removed for now, because is bugged with enemy hit*/
 
         Destroy(Trail.gameObject, Trail.time);
     }

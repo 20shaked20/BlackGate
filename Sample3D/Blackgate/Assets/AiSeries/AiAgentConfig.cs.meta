@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 61b5318556053684eb3da5d45b4b8890
+guid: 7ec4553662584ed41a925c93e7e34172
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - health: {instanceID: 0}
-  - bloodParticle: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
