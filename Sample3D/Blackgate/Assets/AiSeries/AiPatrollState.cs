@@ -38,8 +38,10 @@ public class AiPatrollState : AiState
             walkPointSet = false;
 
 
-        if(agent.config.CheckIfPlayerInSight(agent))
+        /*if player is in agent sight, chase him*/
+        if(agent.sensor.IsInSight(agent.playerTransform.gameObject))
         {
+            Debug.Log("Player In Sight");
             agent.navMeshAgent.speed = 3;
             agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
         }
@@ -49,14 +51,18 @@ public class AiPatrollState : AiState
     private void SearchWalkPoint(AiAgent agent)
     {
         /*Calculate random point in range to walk*/
-        float randomZ = Random.Range(-agent.config.walkPointRange, agent.config.walkPointRange);
-        float randomX = Random.Range(-agent.config.walkPointRange, agent.config.walkPointRange);
 
+        WorldBounds worldBounds = GameObject.FindObjectOfType<WorldBounds>();
+        Vector3 min = worldBounds.min.position;
+        Vector3 max = worldBounds.max.position;
 
-        walkPoint = new Vector3(x: agent.transform.position.x + randomX, y: agent.transform.position.y, z: agent.transform.position.z + randomZ);
+        walkPoint = new Vector3(
+            Random.Range(min.x,max.x),
+            Random.Range(min.y,max.y),
+            Random.Range(min.z,max.z)
+        );
         Debug.Log("WalkPoint :" + walkPoint);
 
-        // if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) /*bugging the ai rn*/
         walkPointSet = true;
     }
 }

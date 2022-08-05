@@ -26,7 +26,8 @@ public class AiAttackState : AiState
 
         agent.transform.LookAt(agent.playerTransform);
 
-        if (!alreadyAttacked)
+        /*checking if player in attack range & can attack */
+        if (!alreadyAttacked && agent.config.CheckIfPlayerInAttackRange(agent))
         {
             /*in here need to add what type of attack*/
             agent.animator.SetBool("IsAttacking", true);
@@ -36,16 +37,16 @@ public class AiAttackState : AiState
             ResetAttack(); /*gap between each attack to reset it*/
         }
 
-        if (!agent.config.CheckIfPlayerInAttackRange(agent) && agent.config.CheckIfPlayerInSight(agent))
-        {
+        // if (!agent.config.CheckIfPlayerInAttackRange(agent) && agent.config.CheckIfPlayerInSight(agent))
+        // {
 
-            agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
-        }
-        else if (!agent.config.CheckIfPlayerInAttackRange(agent) && !agent.config.CheckIfPlayerInSight(agent))
-        {
-            agent.navMeshAgent.speed = 0.2659392f;
-            agent.stateMachine.ChangeState(AiStateId.Patrol);
-        }
+        //     agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
+        // }
+        // else if (!agent.config.CheckIfPlayerInAttackRange(agent) && !agent.config.CheckIfPlayerInSight(agent))
+        // {
+        //     agent.navMeshAgent.speed = 0.2659392f;
+        //     agent.stateMachine.ChangeState(AiStateId.Patrol);
+        // }
     }
     private void ResetAttack()
     {

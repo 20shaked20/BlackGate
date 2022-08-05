@@ -8,6 +8,7 @@ public class AiChasePlayerState : AiState
     float timer = 0.0f;   
     public void Enter(AiAgent agent)
     {
+        Debug.Log("Chasing player");
     }
 
     public void Exit(AiAgent agent)
@@ -47,12 +48,15 @@ public class AiChasePlayerState : AiState
             }
             timer = agent.config.maxTime;
         }
+        
 
-        if (!agent.config.CheckIfPlayerInSight(agent))
-        {
-            agent.navMeshAgent.speed = 0.2659392f;
-            agent.stateMachine.ChangeState(AiStateId.Patrol);
-        }
+        /*if player ran from agent, change the state to patrol*/
+        // if(!agent.sensor.IsInSight(agent.playerTransform.gameObject))
+        // {
+        //     agent.navMeshAgent.speed = 0.2659392f;
+        //     agent.stateMachine.ChangeState(AiStateId.Patrol);
+        // }
+        /*if agent reached player, start attacking him*/
         if(agent.config.CheckIfPlayerInAttackRange(agent))
         {
             agent.stateMachine.ChangeState(AiStateId.Attack);

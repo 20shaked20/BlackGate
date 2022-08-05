@@ -18,6 +18,7 @@ MonoBehaviour:
   maxSightDistance: 5
   attackRange: 1
   walkPointRange: 3
+  viewAngle: 180
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 256

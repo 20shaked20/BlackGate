@@ -12,12 +12,14 @@ public class AiAgent : MonoBehaviour
     public Ragdoll ragdoll;
     public Transform playerTransform;
     public Animator animator;
+    public AiSensor sensor;
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         ragdoll = GetComponent<Ragdoll>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
+        sensor = GetComponent<AiSensor>();
 
         stateMachine = new AiStateMachine(this);
         stateMachine.RegisterState(new AiChasePlayerState());
