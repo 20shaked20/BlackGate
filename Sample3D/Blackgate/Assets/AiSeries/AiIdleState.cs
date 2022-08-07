@@ -6,6 +6,7 @@ public class AiIdleState : AiState
 {
     public void Enter(AiAgent agent)
     {
+        Debug.Log("Agent idle");
     }
 
     public void Exit(AiAgent agent)

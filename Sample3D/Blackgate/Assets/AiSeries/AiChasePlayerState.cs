@@ -8,7 +8,7 @@ public class AiChasePlayerState : AiState
     float timer = 0.0f;   
     public void Enter(AiAgent agent)
     {
-        Debug.Log("Chasing player");
+        Debug.Log("Agent Chase Player");
     }
 
     public void Exit(AiAgent agent)

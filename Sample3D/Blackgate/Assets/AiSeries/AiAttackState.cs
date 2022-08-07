@@ -7,6 +7,7 @@ public class AiAttackState : AiState
     bool alreadyAttacked;
     public void Enter(AiAgent agent)
     {
+        Debug.Log("Agent attack");
     }
 
     public void Exit(AiAgent agent)
@@ -37,16 +38,18 @@ public class AiAttackState : AiState
             ResetAttack(); /*gap between each attack to reset it*/
         }
 
-        // if (!agent.config.CheckIfPlayerInAttackRange(agent) && agent.config.CheckIfPlayerInSight(agent))
+        /*case where player is still in sight but ran from agent so agent will chase him*/
+        if(!agent.config.CheckIfPlayerInAttackRange(agent) && agent.sensor.IsInSight(agent.playerTransform.gameObject))
+        {
+            agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
+        }
+        /*case where player is not in attack range and not in sight, simple revert to patrol*/
+        // else if(!agent.config.CheckIfPlayerInAttackRange(agent) && !agent.sensor.IsInSight(agent.playerTransform.gameObject))
         // {
-
-        //     agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
+        //      agent.navMeshAgent.speed = 0.2659392f;
+        //      agent.stateMachine.ChangeState(AiStateId.Patrol);
         // }
-        // else if (!agent.config.CheckIfPlayerInAttackRange(agent) && !agent.config.CheckIfPlayerInSight(agent))
-        // {
-        //     agent.navMeshAgent.speed = 0.2659392f;
-        //     agent.stateMachine.ChangeState(AiStateId.Patrol);
-        // }
+        
     }
     private void ResetAttack()
     {

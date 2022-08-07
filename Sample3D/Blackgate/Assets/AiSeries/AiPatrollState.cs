@@ -9,6 +9,7 @@ public class AiPatrollState : AiState
     
     public void Enter(AiAgent agent)
     {
+        Debug.Log("Agent Patrol");
     }
 
     public void Exit(AiAgent agent)
@@ -41,7 +42,6 @@ public class AiPatrollState : AiState
         /*if player is in agent sight, chase him*/
         if(agent.sensor.IsInSight(agent.playerTransform.gameObject))
         {
-            Debug.Log("Player In Sight");
             agent.navMeshAgent.speed = 3;
             agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
         }
