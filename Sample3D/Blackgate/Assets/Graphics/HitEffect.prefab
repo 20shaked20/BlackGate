@@ -4902,7 +4902,6 @@ GameObject:
   - component: {fileID: 9151524833513866528}
   - component: {fileID: 9064919875212695174}
   - component: {fileID: 9064373084477681688}
-  - component: {fileID: -4741871222857236879}
   m_Layer: 1
   m_Name: HitEffect
   m_TagString: Bullet
@@ -9787,20 +9786,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &-4741871222857236879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9154229115824779020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d8386518ff293a4a9ee4c75ada83486, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bloodParticle: {fileID: 1962516439210982, guid: 3c657dedc43d33a4987fbf09e6363067,
-    type: 3}
 --- !u!1 &9154529626850792690
 GameObject:
   m_ObjectHideFlags: 0

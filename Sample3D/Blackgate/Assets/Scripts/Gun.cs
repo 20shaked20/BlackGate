@@ -14,10 +14,13 @@ public class Gun : MonoBehaviour
     [SerializeField] private Vector3 BulletSpreadVariance = new Vector3(0.1f,0.1f,0.1f);
     [SerializeField] private ParticleSystem ShootingSystem;
     [SerializeField] private Transform BulletSpawnPoint;
-    [SerializeField] private ParticleSystem ImpactParticaleSystem;
+    [SerializeField] private ParticleSystem ImpactParticle;
+    [SerializeField] private ParticleSystem BuildingParticle;
+    [SerializeField] private ParticleSystem WaterParticle;
     [SerializeField] private TrailRenderer BulletTrail;
     [SerializeField] private float ShootDelay = 0.5f;
     [SerializeField] private LayerMask Mask;
+
     public float Damage = 10; 
 
     // private Animator Animator;
@@ -27,7 +30,6 @@ public class Gun : MonoBehaviour
     {
         // Animator = GetComponent<Animator>();
     }
-    
     public void Shoot(Vector3 aimDir)
     {
         if(LastShootTime + ShootDelay < Time.time)
@@ -67,8 +69,11 @@ public class Gun : MonoBehaviour
 
         // Animator.SetBool("IsShooting",false);
         Trail.transform.position = Hit.point;
-        // if(Hit.transform.tag != "Enemy")
-            // Instantiate(ImpactParticaleSystem, Hit.point, Quaternion.LookRotation(Hit.normal)); /*removed for now, because is bugged with enemy hit*/
+        // Debug.Log(Hit.transform.tag);
+        if(Hit.transform.tag == "Untagged")
+            Instantiate(ImpactParticle, Hit.point, Quaternion.LookRotation(Hit.normal)); /*removed for now, because is bugged with enemy hit*/
+        if(Hit.transform.tag == "Water")
+            Instantiate(WaterParticle, Hit.point, Quaternion.LookRotation(Hit.normal));
 
         Destroy(Trail.gameObject, Trail.time);
     }

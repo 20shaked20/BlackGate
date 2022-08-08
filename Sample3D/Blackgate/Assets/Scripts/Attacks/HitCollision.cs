@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class HitCollision : MonoBehaviour
 {
-    public GameObject bloodParticle;
-    GameObject bloodSpray;
+    [SerializeField] private ParticleSystem BuildingImpactParticleSystem;
+    [SerializeField] private ParticleSystem WaterImpactParticleSytem;
 
     private void OnParticleCollision(GameObject other)
-    {   
-        ZombieAi z;
-        if( z = other.GetComponent<ZombieAi>())
+    {
+
+        if (other.tag == "Building")
         {
-            z.TakeDamage(10);
-            bloodSpray = Instantiate(bloodParticle, transform.position, Quaternion.identity);
-            bloodSpray.transform.parent = z.transform; /*set the blood particle as child of the zombie so it will stick to him*/
-            Destroy(gameObject); /*does not need to see the hit effect on walls when attacking zombies*/
+
+            Instantiate(BuildingImpactParticleSystem, transform.position, Quaternion.identity);
+        }
+        if (other.tag == "Water")
+        {
+
+            // Instantiate(BuildingImpactParticleSystem, transform.position, Quaternion.identity);
         }
     }
-    
+
 }
