@@ -88,6 +88,7 @@ namespace StarterAssets
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
         private bool isCrouching;
+        [HideInInspector] public bool isSwimming;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -161,8 +162,12 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
-            GroundedCheck();
+            if (!isSwimming) /*its checked in the swimmingcontroller script*/
+            {
+                JumpAndGravity();
+                GroundedCheck();
+
+            }
             Move();
         }
 
@@ -302,8 +307,8 @@ namespace StarterAssets
         }
 
         private void JumpAndGravity()
-        {   
-        
+        {
+
             if (Grounded)
             {
                 // reset the fall timeout timer
@@ -334,14 +339,14 @@ namespace StarterAssets
                         _animator.SetBool(_animIDJump, true);
                     }
                     /*check if sprinting*/
-                    if(_input.sprint)
+                    if (_input.sprint)
                     {
-                        _animator.SetBool("IsRunning",true);
+                        _animator.SetBool("IsRunning", true);
                         // Debug.Log("Is Running");
                     }
                     else
                     {
-                        _animator.SetBool("IsRunning",false);
+                        _animator.SetBool("IsRunning", false);
                         // Debug.Log("Not Running");
                     }
                 }
@@ -434,5 +439,6 @@ namespace StarterAssets
         {
             _rotateOnMove = newRotateOnMove;
         }
+
     }
 }
